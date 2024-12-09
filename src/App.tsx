@@ -1,5 +1,9 @@
-function App() {
-  return <div>App</div>
-}
+import { Cart } from "./components/Cart/Cart.tsx"
 
-export default App
+export const App = () => {
+  return (
+    <div>
+      <Cart />
+    </div>
+  )
+}
