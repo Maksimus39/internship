@@ -1,0 +1,9 @@
+.container {
+  margin: 100px 0 0 50px;
+}
+
+.postContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

@@ -7,7 +7,15 @@ export const Cart = () => {
   return (
     <>
       <button onClick={() => setShowModal(true)}>Cart</button>
-      {showModal && <Modal open={showModal} onClose={() => setShowModal(false)}></Modal>}
+      {showModal && (
+        <Modal modalTitle={"Cart"} open={showModal} onClose={() => setShowModal(false)}>
+          <ul>
+            <li>1 товар</li>
+            <li>2 товар</li>
+            <li>3 товар</li>
+          </ul>
+        </Modal>
+      )}
     </>
   )
 }

@@ -1,9 +1,11 @@
-import { Cart } from "./components/Cart/Cart.tsx"
+import { Header } from "./components/Header/Header.tsx"
+import { Posts } from "./components/Posts/Posts.tsx"
 
 export const App = () => {
   return (
     <div>
-      <Cart />
+      <Header />
+      <Posts />
     </div>
   )
 }
