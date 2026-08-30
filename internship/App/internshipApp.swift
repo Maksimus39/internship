@@ -4,20 +4,21 @@ import SwiftUI
 struct internshipApp: App {
     
     init() {
-           // Временная проверка парсинга — удалим после Этапа 2
-           if let response = loadJSONFromBundle("users", as: ApiResponse.self) {
-               let users = response.record.data.users
-               print("✅ Успешно распарсено врачей: \(users.count)")
-               if let first = users.first {
-                   print("👤 Первый: \(first.lastName) \(first.firstName) \(first.patronymic)")
-                   print("⭐ Рейтинг: \(first.ratingsRating)")
-                   print("💼 Стаж: \(first.seniority) лет")
-                   print("💰 Видео: \(first.videoChatPrice) ₽")
-               }
-           } else {
-               print("❌ Не удалось распарсить JSON")
-           }
-       }
+            // Проверка через сервис
+            let service = BundleDataService()
+            let users = service.loadUsers()
+            
+            print("✅ Через сервис загружено врачей: \(users.count)")
+            
+            if let first = users.first {
+                print("👤 \(first.fullName)")
+                print("🏥 \(first.specialization)")
+                print("⭐ Рейтинг: \(first.rating)")
+                print("💼 \(first.seniorityText)")
+                print("💰 \(first.formattedPrice)")
+                print("📅 Свободные слоты: \(first.hasFreeSlots)")
+            }
+        }
     
     var body: some Scene {
         WindowGroup {

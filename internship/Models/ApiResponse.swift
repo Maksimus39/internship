@@ -1,13 +1,13 @@
 import Foundation
 
 
-// MARK: - Корневой объект ответа
+
 struct ApiResponse: Codable {
     let record: RecordData
     let metadata: Metadata
 }
 
-// MARK: - Метаданные
+
 struct Metadata: Codable {
     let id: String
     let isPrivate: Bool
@@ -16,18 +16,18 @@ struct Metadata: Codable {
     
     enum CodingKeys: String, CodingKey {
         case id
-        case isPrivate = "private"   // "private" — зарезервированное слово в Swift
+        case isPrivate = "private"
         case createdAt
         case name
     }
 }
 
-// MARK: - Контейнер записей
+
 struct RecordData: Codable {
     let count: Int
     let previous: String?
     let message: String
-    let errors: [String]?            // null → Optional
+    let errors: [String]?
     let data: UsersContainer
 }
 
@@ -35,7 +35,7 @@ struct UsersContainer: Codable {
     let users: [UserDTO]
 }
 
-// MARK: - Пользователь (DTO — точная копия JSON)
+
 struct UserDTO: Codable, Identifiable {
     let id: String
     let slug: String
@@ -57,7 +57,7 @@ struct UserDTO: Codable, Identifiable {
     let freeReceptionTime: [FreeSlotDTO]
     let educationTypeLabel: EducationLabelDTO?
     let higherEducation: [HigherEducationDTO]
-    let workExpirience: [WorkExperienceDTO]   // ⚠️ Опечатка API сохранена намеренно
+    let workExpirience: [WorkExperienceDTO]
     let advancedTraining: [AdvancedTrainingDTO]
     let rank: Int
     let rankLabel: String
@@ -86,7 +86,7 @@ struct UserDTO: Codable, Identifiable {
         case freeReceptionTime    = "free_reception_time"
         case educationTypeLabel   = "education_type_label"
         case higherEducation      = "higher_education"
-        case workExpirience       = "work_expirience"    // ⚠️ Опечатка из API
+        case workExpirience       = "work_expirience"
         case advancedTraining     = "advanced_training"
         case rank
         case rankLabel            = "rank_label"
@@ -98,7 +98,7 @@ struct UserDTO: Codable, Identifiable {
     }
 }
 
-// MARK: - Вложенные DTO-структуры
+
 
 struct SpecializationDTO: Codable, Identifiable {
     let id: Int
