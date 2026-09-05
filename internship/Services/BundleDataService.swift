@@ -3,7 +3,7 @@ import Foundation
 
 
 
-protocol DataServiceProtocol {
+protocol DataServiceProtocol: Sendable {
     func loadUsers() -> [User]
 }
 
