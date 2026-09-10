@@ -1,12 +1,11 @@
 import SwiftUI
 
-
 struct TabItem: Identifiable {
     let id: Int
     let icon: TabIcon
     let label: String
+    let view: AnyView?
 }
-
 
 enum TabIcon {
     case system(String)
@@ -33,8 +32,8 @@ enum TabIcon {
     }
 }
 
-
 struct AppTabBar: View {
+    
     
     init() {
         UITabBar.appearance().isHidden = true
@@ -47,25 +46,43 @@ struct AppTabBar: View {
     private let tabs: [TabItem] = [
         TabItem(id: 0,
                 icon: .system("house.fill"),
-                label: "Главная"),
+                label: "Главная",
+                view: AnyView(MainDortorsListView())),
         TabItem(id: 1,
                 icon: .asset("calendar"),
-                label: "Приёмы"),
+                label: "Приёмы",
+                view: nil),
         TabItem(id: 2,
                 icon: .system("message.fill"),
-                label: "Чат"),
+                label: "Чат",
+                view: nil),
         TabItem(id: 3,
                 icon: .system("person.fill"),
-                label: "Профиль")
+                label: "Профиль",
+                view: nil)
     ]
     
     var body: some View {
         ZStack(alignment: .bottom) {
-            
             TabView(selection: $selectedPage) {
                 ForEach(tabs) { tab in
-                    Text(tab.label)
+                    if let view = tab.view {
+                        view
+                            .tag(tab.id)
+                    } else {
+                        VStack(spacing: 20) {
+                            Image(systemName: "pencil.circle.fill")
+                                .font(.system(size: 60))
+                                .foregroundColor(.gray)
+                            
+                            Text("Экран \"\(tab.label)\" в разработке")
+                                .font(.title2)
+                                .foregroundColor(.gray)
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .background(Color(.systemBackground))
                         .tag(tab.id)
+                    }
                 }
             }
             
@@ -104,6 +121,8 @@ struct AppTabBar: View {
         }
     }
 }
+
+
 
 #Preview {
     AppTabBar()
